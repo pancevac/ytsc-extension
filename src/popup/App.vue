@@ -8,6 +8,9 @@
 export default {
   data () {
     return {}
+  },
+  mounted() {
+    console.log('window open!')
   }
 }
 </script>

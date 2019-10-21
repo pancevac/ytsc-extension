@@ -1,3 +1,6 @@
 global.browser = require('webextension-polyfill')
-alert('Hello world!')
+
+browser.browserAction.onClicked.addListener((tab) => {
+  browser.tabs.sendMessage(tab.id, {command: 'openWindow', tab})
+});
 
