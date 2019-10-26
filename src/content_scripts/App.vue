@@ -25,7 +25,7 @@
           class="cse-input cse-search-input cse-flex-item"
           placeholder="type keywords here" spellcheck="false"
           autocomplete="off">
-        <div class="cse-comment-count">5141</div>
+        <div class="cse-comment-count">{{ Object.keys(statistics).length !== 0 ? statistics.commentCount : 0 }}</div>
       </div>
       <div class="cse-container-view cse-flex-item">
         <div class="cse-view">
@@ -42,6 +42,9 @@
 </template>
 
 <script>
+  import config from "../config";
+  import { CommentResource } from "../utils/CommentResource";
+
   export default {
 
     data() {
@@ -49,25 +52,89 @@
         show: true,
         searching: false,
         comments: [],
-        searchTerm: ''
+        searchTerm: '',
+        statistics: {},
       }
     },
 
     mounted() {
-      console.log('window open!')
       browser.runtime.onMessage.addListener((message) => {
         if (message.command === 'openWindow') {
           this.toggleShow()
         }
       })
+      this.fetchStatistics();
     },
 
     methods: {
+      /**
+       * Toggle plugin visibility on page.
+       */
       toggleShow() {
         this.show = !this.show
       },
+
+      /**
+       * Submit search term and call method for fetching comments.
+       */
       submit() {
-        alert('submitovano')
+        this.fetchSearchedComments()
+      },
+
+      /**
+       * Fetch video statistics, including comment count.
+       */
+      fetchStatistics() {
+        const statParams = {
+          part: 'statistics',
+          id: this.$root.videoId,
+          key: config.apiKey
+        }
+
+        axios.get('/videos', {params: statParams})
+          .then(this.handleStatisticsResponse)
+          .catch(err => console.log(err.response.data))
+      },
+
+      /**
+       * Put statistics response in component data.
+       */
+      handleStatisticsResponse({data}) {
+        if (data.items.length) {
+          this.statistics = data.items[0].statistics
+        }
+      },
+
+      /**
+       * Fetch video comments by search term.
+       */
+      fetchSearchedComments() {
+        const threadParams = {
+          part: 'snippet, replies',
+          videoId: this.$root.videoId,
+          searchTerms: this.searchTerm,
+          maxResults: 100,
+          order: 'relevance',
+          key: config.apiKey
+        }
+
+        axios.get('/commentThreads', {params: threadParams})
+          .then(this.handleCommentsResponse)
+          .catch(err => console.log(err.response.data))
+      },
+
+      /**
+       * Map returned comments with replies with CommentResource class
+       * into single array and load into template.
+       *
+       * @param data
+       */
+      handleCommentsResponse({data}) {
+        if (data.items.length > 0) {
+          this.comments = data.items.map((comment) => {
+            return (new CommentResource(comment)).fetch
+          })
+        }
       }
     }
   }
