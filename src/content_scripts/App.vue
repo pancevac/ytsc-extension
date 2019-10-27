@@ -35,6 +35,12 @@
           v-if="comments.length > 0"
           class="cse-view cse-scroll-view"
         >
+          <thread
+            v-for="(comment, key) in comments"
+            :key="key"
+            :video-id="videoId"
+            :comment="comment"
+          ></thread>
         </div>
       </div>
     </div>
@@ -44,13 +50,17 @@
 <script>
   import config from "../config";
   import { CommentResource } from "../utils/CommentResource";
+  import CommentThread from "./components/CommentThread";
 
   export default {
+
+    components: { thread: CommentThread },
 
     data() {
       return {
         show: true,
         searching: false,
+        videoId: '',
         comments: [],
         searchTerm: '',
         statistics: {},
@@ -63,7 +73,8 @@
           this.toggleShow()
         }
       })
-      this.fetchStatistics();
+      this.videoId = this.$root.videoId
+      this.fetchStatistics()
     },
 
     methods: {
@@ -87,7 +98,7 @@
       fetchStatistics() {
         const statParams = {
           part: 'statistics',
-          id: this.$root.videoId,
+          id: this.videoId,
           key: config.apiKey
         }
 
@@ -118,9 +129,13 @@
           key: config.apiKey
         }
 
+        this.searching = true
         axios.get('/commentThreads', {params: threadParams})
           .then(this.handleCommentsResponse)
-          .catch(err => console.log(err.response.data))
+          .catch(err => {
+            console.log(err.response.data)
+            this.searching = false
+          })
       },
 
       /**
@@ -134,6 +149,7 @@
           this.comments = data.items.map((comment) => {
             return (new CommentResource(comment)).fetch
           })
+          this.searching = false
         }
       }
     }
