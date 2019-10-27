@@ -6,6 +6,8 @@ class CommentResource {
     this.authorProfileImageUrl = snippet.topLevelComment.snippet.authorProfileImageUrl
     this.authorChannelUrl = snippet.topLevelComment.snippet.authorChannelUrl
     this.textDisplay = snippet.topLevelComment.snippet.textDisplay
+    this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&amp;lc=${id}`
+    this.publishedAt = snippet.topLevelComment.snippet.publishedAt
     this.replies = snippet.totalReplyCount > 0 ?
       replies.comments.map((comment) => (new ReplyResource(comment)).fetch) :
       []
@@ -19,10 +21,13 @@ class CommentResource {
 class ReplyResource {
   constructor({id, snippet}) {
     this.id = id
+    this.parentId = snippet.parentId
     this.authorName = snippet.authorDisplayName
     this.authorProfileImageUrl = snippet.authorProfileImageUrl
     this.authorChannelUrl = snippet.authorChannelUrl
     this.textDisplay = snippet.textDisplay
+    this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&amp;lc=${id}`
+    this.publishedAt = snippet.publishedAt
   }
 
   get fetch() {
