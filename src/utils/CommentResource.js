@@ -1,3 +1,5 @@
+import DateParser from "./DateParser";
+
 class CommentResource {
   constructor({id, snippet, replies}) {
     this.id = id
@@ -7,7 +9,7 @@ class CommentResource {
     this.authorChannelUrl = snippet.topLevelComment.snippet.authorChannelUrl
     this.textDisplay = snippet.topLevelComment.snippet.textDisplay
     this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&amp;lc=${id}`
-    this.publishedAt = snippet.topLevelComment.snippet.publishedAt
+    this.publishedAt = DateParser(snippet.topLevelComment.snippet.publishedAt)
     this.replies = snippet.totalReplyCount > 0 ?
       replies.comments.map((comment) => (new ReplyResource(comment)).fetch) :
       []
@@ -27,7 +29,7 @@ class ReplyResource {
     this.authorChannelUrl = snippet.authorChannelUrl
     this.textDisplay = snippet.textDisplay
     this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&amp;lc=${id}`
-    this.publishedAt = snippet.publishedAt
+    this.publishedAt = DateParser(snippet.publishedAt)
   }
 
   get fetch() {
