@@ -477,7 +477,7 @@
     font-size: medium;
   }
   .cse-comment-text a {
-    color: var(--cse_linkColor);
+    color: var(--cse_linkColor) !important;
   }
   .cse-trimmed {
     -webkit-box-orient: vertical;
