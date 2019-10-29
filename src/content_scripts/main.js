@@ -12,7 +12,7 @@ window.axios.defaults.baseURL = config.apiUrl
  * Init vue app. First create div tag on the bottom of body, with id
  * of app, then init Vue...
  */
-function initApp({url}) {
+function initApp({url, id, windowId}) {
   // Append page body with new div on which will be mounted vue app...
   let app = document.createElement('div')
   app.setAttribute('id', 'app')
@@ -23,7 +23,11 @@ function initApp({url}) {
 
   new Vue({
     el: '#app',
-    data: {videoId},
+    data: {
+      videoId,
+      tabId: id,
+      windowId
+    },
     render: h => h(App)
   })
 }

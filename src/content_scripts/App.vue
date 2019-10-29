@@ -68,13 +68,10 @@
     },
 
     mounted() {
-      browser.runtime.onMessage.addListener((message) => {
-        if (message.command === 'openWindow') {
-          this.toggleShow()
-        }
-      })
       this.videoId = this.$root.videoId
+      this.mountListeners()
       this.fetchStatistics()
+      //this.notifyBackgroundOnLoad()
     },
 
     methods: {
@@ -122,7 +119,7 @@
       fetchSearchedComments() {
         const threadParams = {
           part: 'snippet, replies',
-          videoId: this.$root.videoId,
+          videoId: this.videoId,
           searchTerms: this.searchTerm,
           maxResults: 100,
           order: 'relevance',
@@ -151,6 +148,33 @@
           })
           this.searching = false
         }
+      },
+
+      /**
+       * Listen for messages from background script (commands and status).
+       * Example, if youtube page is changed, update videoId property and fetch new video statistics.
+       */
+      mountListeners() {
+        browser.runtime.onMessage.addListener((message) => {
+          if (message.command === 'openWindow') {
+            this.toggleShow()
+          } else if (message.status === 'pageChanged') {
+            this.videoId = message.videoId
+            this.fetchStatistics()
+          }
+        })
+      },
+
+      /**
+       * Notify background script when component is mounted,
+       * with corresponded tab ID and window ID.
+       */
+      notifyBackgroundOnLoad() {
+        browser.runtime.sendMessage({
+          status: 'pageLoaded',
+          tabId: this.$root.tabId,
+          windowId: this.$root.windowId
+        })
       }
     }
   }
