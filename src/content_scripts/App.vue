@@ -24,7 +24,9 @@
           @keyup.enter="submit"
           class="cse-input cse-search-input cse-flex-item"
           placeholder="type keywords here" spellcheck="false"
-          autocomplete="off">
+          autocomplete="off"
+          :disabled="disableInput"
+        >
         <div class="cse-comment-count">{{ commentCount }}</div>
       </div>
       <div class="cse-container-view cse-flex-item">
@@ -64,7 +66,8 @@
         comments: [],
         searchTerm: '',
         statistics: {},
-        responseMessage: ''
+        responseMessage: '',
+        disableInput: false
       }
     },
 
@@ -138,6 +141,7 @@
           key: config.apiKey
         }
 
+        this.disableInput = true
         this.responseMessage = 'Searching...'
         this.flushComments()
         axios.get('/commentThreads', {params: threadParams})
@@ -152,6 +156,7 @@
        * @param data
        */
       handleCommentsResponse({data}) {
+        this.disableInput = false
         if (data.items.length > 0) {
           this.comments = data.items.map((comment) => {
             return (new CommentResource(comment)).fetch
@@ -166,6 +171,7 @@
         console.log(err.response.data)
         this.responseMessage = 'Ups, something went wrong...'
         this.flushComments()
+        this.disableInput = false
       },
 
       /**
