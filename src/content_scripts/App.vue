@@ -25,11 +25,11 @@
           class="cse-input cse-search-input cse-flex-item"
           placeholder="type keywords here" spellcheck="false"
           autocomplete="off">
-        <div class="cse-comment-count">{{ Object.keys(statistics).length !== 0 ? statistics.commentCount : 0 }}</div>
+        <div class="cse-comment-count">{{ commentCount }}</div>
       </div>
       <div class="cse-container-view cse-flex-item">
         <div class="cse-view">
-          <div class="cse-dialog-message">{{ searching ? 'Searching...' : '' }}</div>
+          <div class="cse-dialog-message">{{ responseMessage }}</div>
         </div>
         <div
           v-if="comments.length > 0"
@@ -59,11 +59,12 @@
     data() {
       return {
         show: true,
-        searching: false,
+        //searching: false,
         videoId: '',
         comments: [],
         searchTerm: '',
         statistics: {},
+        responseMessage: ''
       }
     },
 
@@ -72,6 +73,15 @@
       this.mountListeners()
       this.fetchStatistics()
       //this.notifyBackgroundOnLoad()
+    },
+
+    computed: {
+      /**
+       * Get total number of comments from statistics object.
+       */
+      commentCount() {
+        return Object.keys(this.statistics).length !== 0 ? this.statistics.commentCount : 0
+      },
     },
 
     methods: {
@@ -99,9 +109,10 @@
           key: config.apiKey
         }
 
+        this.responseMessage = ''
         axios.get('/videos', {params: statParams})
           .then(this.handleStatisticsResponse)
-          .catch(err => console.log(err.response.data))
+          .catch(this.handleErrorResponse)
       },
 
       /**
@@ -110,6 +121,7 @@
       handleStatisticsResponse({data}) {
         if (data.items.length) {
           this.statistics = data.items[0].statistics
+          this.flushComments()
         }
       },
 
@@ -126,13 +138,11 @@
           key: config.apiKey
         }
 
-        this.searching = true
+        this.responseMessage = 'Searching...'
+        this.flushComments()
         axios.get('/commentThreads', {params: threadParams})
           .then(this.handleCommentsResponse)
-          .catch(err => {
-            console.log(err.response.data)
-            this.searching = false
-          })
+          .catch(this.handleErrorResponse)
       },
 
       /**
@@ -146,8 +156,16 @@
           this.comments = data.items.map((comment) => {
             return (new CommentResource(comment)).fetch
           })
-          this.searching = false
+        } else {
+          this.responseMessage = `Nothing found in ${this.commentCount} comments`
+          this.flushComments()
         }
+      },
+
+      handleErrorResponse(err) {
+        console.log(err.response.data)
+        this.responseMessage = 'Ups, something went wrong...'
+        this.flushComments()
       },
 
       /**
@@ -175,6 +193,13 @@
           tabId: this.$root.tabId,
           windowId: this.$root.windowId
         })
+      },
+
+      /**
+       * Empty existing comments array.
+       */
+      flushComments() {
+        this.comments = []
       }
     }
   }
