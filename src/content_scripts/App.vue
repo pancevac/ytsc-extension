@@ -23,11 +23,11 @@
           v-model="searchTerm"
           @keyup.enter="submit"
           class="cse-input cse-search-input cse-flex-item"
-          placeholder="type keywords here" spellcheck="false"
+          placeholder="Type keywords here" spellcheck="false"
           autocomplete="off"
           :disabled="disableInput"
         >
-        <div class="cse-comment-count">{{ commentCount }}</div>
+        <div class="cse-comment-count">{{ commentCount }} comments</div>
       </div>
       <div class="cse-container-view cse-flex-item">
         <div class="cse-view">
@@ -215,8 +215,8 @@
 
   html {
     --cse_windowBackground: #222;
-    --cse_headerBackground: #292929;
-    --cse_placeholderColor: rgba(255, 255, 255, .1);
+    --cse_headerBackground: #cc0000;
+    --cse_placeholderColor: rgba(255, 255, 255, .7);
     --cse_textColor: #d6d6d6;
     --cse_linkColor: #609fff;
     --cse_metaColor: #888;
@@ -234,8 +234,8 @@
   }
   html:not([dark="true"]):not([cse-fullscreen="true"]) {
     --cse_windowBackground: #fff;
-    --cse_headerBackground: #dadada;
-    --cse_placeholderColor: rgba(0, 0, 0, .29);
+    --cse_headerBackground: #fe0000;
+    --cse_placeholderColor: rgba(255, 255, 255, .3);
     --cse_textColor: #111;
     --cse_linkColor: #065fd4;
     --cse_metaColor: #888;
@@ -311,12 +311,13 @@
   }
   .cse-svg {
     display: block;
-    fill: currentColor;
-    stroke: currentColor;
+    fill: white;
+    color: white;
+    stroke: white;
     stroke-width: 0;
   }
   .cse-input {
-    color: inherit;
+    color: white;
     background: none;
     outline: none;
     border: none;
@@ -400,7 +401,7 @@
   .cse-window-button {
     height: 14px;
     width: 14px;
-    opacity: .2;
+    opacity: 1;
     box-sizing: border-box;
     margin-left: 10px;
   }
@@ -426,13 +427,13 @@
     user-select: none;
   }
   .cse-comment-count {
-    background-color: var(--cse_ccBadgeBackground);
-    color: var(--cse_ccBadgeColor);
+    background-color: transparent;
+    color: white;
     border-bottom: 2px solid var(--cse_ccBadgeBorderColor);
     border-radius: 4px;
     padding: 2px 5px 0;
     min-width: 22px;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     transition: border-color .25s, color .25;
   }
