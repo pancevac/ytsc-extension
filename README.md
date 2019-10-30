@@ -2,6 +2,8 @@
 
 Simple plugin for searching YouTube video comments by keywords.
 
+![](docs/addon-screenshot.png)
+
 ## Installation
 Currently only way to install plugin is thought building from source code and importing into browser as temporary add-on. <br>
 :warning: Keep in mind that extension will be removed when browser is restarted.
