@@ -13,7 +13,7 @@ const notifyOnUpdatedTab = (tabId, {title}, tabInfo) => {
     browser.tabs.sendMessage(tabId, {
       status: 'pageChanged',
       tabId: tabId,
-      videoId: tabInfo.url.split('v=')[1] // extract video ID from youtube url
+      videoId: tabInfo.url.split('v=')[1].split('&')[0] // extract video ID from youtube url
     })
   }
 }

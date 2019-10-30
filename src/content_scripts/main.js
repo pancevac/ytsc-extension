@@ -19,7 +19,7 @@ function initApp({url, id, windowId}) {
   document.body.appendChild(app)
 
   // Extract video ID from youtube url
-  const videoId = url.split('v=')[1]
+  const videoId = url.split('v=')[1].split('&')[0]
 
   new Vue({
     el: '#app',
