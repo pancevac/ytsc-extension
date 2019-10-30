@@ -27,7 +27,7 @@
           autocomplete="off"
           :disabled="disableInput"
         >
-        <div class="cse-comment-count">{{ commentCount }} comments</div>
+        <div class="cse-comment-count">{{ formatNumber(commentCount) }} comments</div>
       </div>
       <div class="cse-container-view cse-flex-item">
         <div class="cse-view">
@@ -206,6 +206,16 @@
        */
       flushComments() {
         this.comments = []
+      },
+
+      /**
+       * Format integer number with thousand separator.
+       *
+       * @param num
+       * @returns {string}
+       */
+      formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
       }
     }
   }
