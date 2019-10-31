@@ -42,3 +42,12 @@ browser.runtime.onMessage.addListener((message) => {
     window.hasRun = true
   }
 })
+
+/**
+ * Intercept API requests and inject apiKey.
+ */
+axios.interceptors.request.use((axiosConfig) => {
+  axiosConfig.params = axiosConfig.params || {}
+  axiosConfig.params['key'] = config.apiKey;
+  return axiosConfig;
+});

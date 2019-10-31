@@ -108,8 +108,7 @@
       fetchStatistics() {
         const statParams = {
           part: 'statistics',
-          id: this.videoId,
-          key: config.apiKey
+          id: this.videoId
         }
 
         this.responseMessage = ''
@@ -137,8 +136,7 @@
           videoId: this.videoId,
           searchTerms: this.searchTerm,
           maxResults: 100,
-          order: 'relevance',
-          key: config.apiKey
+          order: 'relevance'
         }
 
         this.disableInput = true
