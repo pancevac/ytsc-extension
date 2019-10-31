@@ -1,0 +1,396 @@
+html {
+    --ytcs_windowBackground: #222;
+    --ytcs_headerBackground: #cc0000;
+    --ytcs_placeholderColor: rgba(255, 255, 255, .7);
+    --ytcs_textColor: #d6d6d6;
+    --ytcs_linkColor: #609fff;
+    --ytcs_metaColor: #888;
+    --ytcs_commentChainBackground: #333;
+    --ytcs_imgBackground: #2f2f2f;
+    --ytcs_ownerBadgeColor: #717171;
+    --ytcs_ccBadgeBackground: #333;
+    --ytcs_ccBadgeColor: #777;
+    --ytcs_ccBadgeBorderColor: transparent;
+    --ytcs_ccBadgeColorActive: #fff;
+    --ytcs_ccBadgeBorderColorActive: orange;
+    --ytcs_codeSnippetBackground: #999;
+    --ytcs_codeSnippetColor: #000;
+    --ytcs_infoViewTextColor: #aaa;
+}
+html:not([dark="true"]):not([ytcs-fullscreen="true"]) {
+    --ytcs_windowBackground: #fff;
+    --ytcs_headerBackground: #fe0000;
+    --ytcs_placeholderColor: rgba(255, 255, 255, .3);
+    --ytcs_textColor: #111;
+    --ytcs_linkColor: #065fd4;
+    --ytcs_metaColor: #888;
+    --ytcs_commentChainBackground: #ddd;
+    --ytcs_imgBackground: #eee;
+    --ytcs_ownerBadgeColor: #9f9f9f;
+    --ytcs_ccBadgeBackground: #ccc;
+    --ytcs_ccBadgeBorderColor: transparent;
+    --ytcs_ccBadgeColor: #555;
+    --ytcs_ccBadgeColorActive: #222;
+    --ytcs_ccBadgeBorderColorActive: darkcyan;
+    --ytcs_codeSnippetBackground: #e5e5e5;
+    --ytcs_infoViewTextColor: #222;
+}
+[hidden] {
+    display: none !important;
+}
+#UIMutableView {
+    background: var(--ytcs_windowBackground);
+    color: var(--ytcs_textColor);
+    display: block;
+    position: fixed;
+    z-index: 9999999999;
+    width: 33vw;
+    top: 30vh;
+    left: 64vw;
+    bottom: 0;
+    transform: translateZ(0);
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    line-height: 20px;
+    cursor: default;
+}
+#UIMutableView a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+.ytcs-noSelect {
+    user-select: none;
+}
+.ytcs-noScrollbar::-webkit-scrollbar {
+    display: none !important;
+}
+.ytcs-canOverScroll::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 60%;
+}
+.ytcs-view {
+    background-color: var(--ytcs_windowBackground);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.ytcs-scroll-view {
+    overflow-y: scroll;
+}
+.ytcs-scroll-view::-webkit-scrollbar {
+    display: none !important;
+}
+.ytcs-container-view {
+    position: relative;
+}
+.ytcs-flex-view {
+    display: flex;
+    flex-flow: column;
+}
+.ytcs-onmove {
+    pointer-events: none;
+    user-select: none;
+}
+.ytcs-svg {
+    display: block;
+    fill: white;
+    color: white;
+    stroke: white;
+    stroke-width: 0;
+}
+.ytcs-input {
+    color: white;
+    background: none;
+    outline: none;
+    border: none;
+}
+.ytcs-underline {
+    text-decoration: underline;
+}
+.ytcs-box {
+    display: -webkit-box;
+}
+.ytcs-flex {
+    display: flex;
+}
+.ytcs-vflex {
+    display: flex;
+    flex-flow: column;
+}
+.ytcs-center-y {
+    align-items: center;
+}
+.ytcs-center-x {
+    justify-content: center;
+}
+.ytcs-center-xy {
+    align-items: center;
+    justify-content: center;
+}
+.ytcs-flex-item {
+    flex: 1;
+}
+.ytcs-resize-bar {
+    position: absolute;
+    background-color: transparent;
+}
+.ytcs-resize-w {
+    left: -4px;
+}
+.ytcs-resize-e {
+    right: -4px;
+}
+.ytcs-resize-side {
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+}
+.ytcs-drag-bar {
+    z-index: 1;
+    top: 0;
+    height: 20px;
+    width: 100%;
+    cursor: move;
+}
+.ytcs-resize-top {
+    z-index: 2;
+    top: -4px;
+    height: 8px;
+    width: 100%;
+    cursor: ns-resize;
+}
+.ytcs-resize-both {
+    z-index: 3;
+    top: -6px;
+    width: 16px;
+    height: 16px;
+}
+.ytcs-resize-nw {
+    left: -6px;
+    cursor: nwse-resize;
+}
+.ytcs-resize-ne {
+    right: -6px;
+    cursor: nesw-resize;
+}
+.ytcs-window-buttons {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 20px;
+    height: 56px;
+}
+.ytcs-window-button {
+    height: 14px;
+    width: 14px;
+    opacity: 1;
+    box-sizing: border-box;
+    margin-left: 10px;
+}
+.ytcs-window-button:hover {
+    opacity: .6;
+}
+.ytcs-back-button {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 14px;
+    left: 15px;
+    opacity: .6;
+}
+.ytcs-back-button:hover {
+    opacity: 1;
+}
+.ytcs-search-header {
+    height: 56px;
+    padding-right: 52px;
+    background-color: var(--ytcs_headerBackground);
+    padding-left: 20px;
+    user-select: none;
+}
+.ytcs-comment-count {
+    background-color: transparent;
+    color: white;
+    border-bottom: 2px solid var(--ytcs_ccBadgeBorderColor);
+    border-radius: 4px;
+    padding: 2px 5px 0;
+    min-width: 22px;
+    font-size: 14px;
+    text-align: center;
+    transition: border-color .25s, color .25;
+}
+.ytcs-comment-count.ytcs-active {
+    color: var(--ytcs_ccBadgeColorActive);
+    border-color: var(--ytcs_ccBadgeBorderColorActive);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    opacity: .7;
+}
+.ytcs-comment-count.ytcs-active:hover {
+    opacity: 1;
+}
+.ytcs-search-input {
+    width: 100%;
+    font-size: 16px;
+}
+.ytcs-search-input::placeholder {
+    color: var(--ytcs_placeholderColor);
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+}
+.ytcs-search-input:focus::placeholder {
+    opacity: 0;
+}
+.ytcs-search-input:not(:focus)::placeholder {
+    opacity: 1;
+    transition: opacity .25s ease-in;
+}
+.ytcs-thread {
+    margin-top: 16px;
+    padding-left: 20px;
+    padding-right: 40px;
+}
+.ytcs-comment {
+    padding-bottom: 20px;
+    position: relative;
+}
+.ytcs-comment:not(:first-child) {
+    margin-left: 56px;
+}
+.ytcs-comment:not(:first-child) .ytcs-user-image {
+    width: 24px;
+    height: 24px;
+}
+.ytcs-chained:before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 2px;
+    background: var(--ytcs_commentChainBackground);
+    position: absolute;
+    left: 11px;
+    z-index: 0;
+}
+.ytcs-comment.ytcs-hidden {
+    display: none;
+}
+.ytcs-author-name {
+    color: inherit;
+    font-weight: 500;
+    line-height: 18px;
+}
+.ytcs-owner-badge {
+    display: none;
+    fill: var(--ytcs_ownerBadgeColor);
+    width: 13px;
+    height: 13px;
+    margin-top: 2px;
+    margin-left: 4px;
+}
+.byUploader .ytcs-owner-badge {
+    display: block;
+}
+.byUploader .ytcs-comment-meta {
+    display: none;
+}
+.ytcs-comment-meta {
+    line-height: 18px;
+    margin-left: 6px;
+}
+.ytcs-comment-date {
+    color: var(--ytcs_metaColor);
+}
+.ytcs-comment-date:hover {
+    color: inherit;
+}
+.ytcs-comment-text {
+    display: -webkit-box;
+}
+.ytcs-comment-text[dir="rtl"] {
+    -webkit-box-orient: vertical;
+    -webkit-box-align: end;
+}
+.ytcs-comment-text:lang(ar) {
+    font-family: sans-serif;
+    font-size: medium;
+}
+.ytcs-comment-text a {
+    color: var(--ytcs_linkColor) !important;
+}
+.ytcs-trimmed {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    word-break: break-word;
+}
+.ytcs-user-image {
+    display: block;
+    background-color: var(--ytcs_imgBackground);
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+    border-radius: 50%;
+    position: relative;
+}
+.ytcs-comment-header {
+    height: 20px;
+    margin-bottom: 2px;
+    font-size: 13px;
+    line-height: normal;
+}
+.ytcs-dialog-message {
+    padding: 20px;
+    text-align: center;
+    user-select: none;
+}
+.ytcs-dialog-message a {
+    text-decoration: underline;
+}
+.ytcs-embedded-player {
+    background: #000;
+    position: relative;
+    margin-top: 12px;
+    padding-bottom: 56.25%;
+}
+.ytcs-embedded-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.ytcs-info-view {
+    color: var(--ytcs_infoViewTextColor);
+    padding: 56px 20px;
+    padding-right: 38px;
+}
+.ytcs-info-title {
+    font-size: large;
+    margin-bottom: 18px;
+}
+.ytcs-info-text {
+    margin-bottom: 15px;
+}
+.ytcs-info-list {
+    margin-bottom: 20px;
+    padding-left: 25px;
+}
+.ytcs-info-list div {
+    margin-bottom: 2px;
+}
+.ytcs-info-code {
+    display: inline-block;
+    background-color: var(--ytcs_codeSnippetBackground);
+    color: var(--ytcs_codeSnippetColor);
+    border-radius: 2px;
+    letter-spacing: 1px;
+    padding: 1px 6px 2px;
+    margin: 0 3px;
+    line-height: normal;
+    font-size: smaller;
+    font-family: monospace;
+}

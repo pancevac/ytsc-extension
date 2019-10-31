@@ -1,30 +1,30 @@
 <template>
 
-  <div class="cse-thread">
-    <div class="cse-comment cse-flex">
+  <div class="ytcs-thread">
+    <div class="ytcs-comment ytcs-flex">
       <div>
-        <a class="cse-user-image"
+        <a class="ytcs-user-image"
            :href="comment.authorChannelUrl"
            :style="{ 'background-image': 'url(' + comment.authorProfileImageUrl + ')' }"
            target="_blank"></a>
       </div>
-      <div class="cse-flex-item">
-        <div class="cse-comment-header cse-box">
-          <div class="cse-box">
-            <a class="cse-author-name"
+      <div class="ytcs-flex-item">
+        <div class="ytcs-comment-header ytcs-box">
+          <div class="ytcs-box">
+            <a class="ytcs-author-name"
                :href="comment.authorChannelUrl"
                target="_blank">{{ comment.authorName }}
             </a>
           </div>
-          <div class="cse-comment-meta">
-            <a class="cse-comment-date"
+          <div class="ytcs-comment-meta">
+            <a class="ytcs-comment-date"
                :href="comment.commentUrl"
                target="_blank">{{ comment.publishedAt }}
             </a>
           </div>
         </div>
         <div
-          class="cse-comment-text"
+          class="ytcs-comment-text"
           dir="ltr"
           lang="en"
           role="commentText"
