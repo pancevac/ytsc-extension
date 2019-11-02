@@ -1,11 +1,11 @@
 {
-  "name": "firefox-ytcs-extension",
+  "name": "YouTube Comment Search",
   "description": "Firefox extension for searching youtube video comments.",
   "version": "1.0",
   "manifest_version": 2,
   "icons": {
-    "48": "icons/icon_48.png",
-    "128": "icons/icon_128.png"
+    "48": "icons/youtube-search-v1-48.png",
+    "128": "icons/youtube-search-v1-128.png"
   },
   "permissions": [
     "tabs",
