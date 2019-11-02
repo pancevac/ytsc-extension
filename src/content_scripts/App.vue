@@ -4,12 +4,12 @@
     id="UIMutableView"
     style="left: 31.4024vw; top: 29.9981vh; width: 32.9995vw;"
   >
-    <div class="ytcs-resize-bar ytcs-resize-top" resize="n"></div>
-    <div class="ytcs-resize-bar ytcs-resize-side ytcs-resize-w" resize="w"></div>
-    <div class="ytcs-resize-bar ytcs-resize-side ytcs-resize-e" resize="e"></div>
-    <div class="ytcs-resize-bar ytcs-resize-both ytcs-resize-nw" resize="nw"></div>
-    <div class="ytcs-resize-bar ytcs-resize-both ytcs-resize-ne" resize="ne"></div>
-    <div class="ytcs-resize-bar ytcs-drag-bar" movable="we"></div>
+    <div class="ytcs-resize-bar ytcs-resize-top"></div>
+    <div class="ytcs-resize-bar ytcs-resize-side ytcs-resize-w"></div>
+    <div class="ytcs-resize-bar ytcs-resize-side ytcs-resize-e"></div>
+    <div class="ytcs-resize-bar ytcs-resize-both ytcs-resize-nw"></div>
+    <div class="ytcs-resize-bar ytcs-resize-both ytcs-resize-ne"></div>
+    <div class="ytcs-resize-bar ytcs-drag-bar"></div>
     <div class="ytcs-window-buttons ytcs-flex ytcs-center-y">
       <div class="ytcs-window-button" @click="toggleShow">
         <svg class="ytcs-svg" viewBox="0 0 24 24">

@@ -26,7 +26,6 @@
         dir="ltr"
         lang="en"
         role="commentText"
-        responder=""
         @click="expand"
         v-html="reply.textDisplay"
       >
