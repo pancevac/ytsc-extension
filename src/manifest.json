@@ -10,18 +10,17 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "https://*.youtube.com/*",
     "https://www.googleapis.com/youtube/v3/*"
   ],
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
+      "matches": ["*://*.youtube.com/watch*"],
       "js": ["content_scripts/main.js"],
       "css": ["content_scripts/main.css"]
     }
   ],
   "browser_action": {
-    "default_title": "firefox-ytcs-extension"
+    "default_title": "YouTube Comment Search"
   },
   "background": {
     "scripts": [
