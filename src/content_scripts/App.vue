@@ -24,6 +24,7 @@
           @keyup.enter="submit"
           class="ytcs-input ytcs-search-input ytcs-flex-item"
           placeholder="Type keywords here" spellcheck="false"
+          ref="search"
           autocomplete="off"
           :disabled="disableInput"
         >
@@ -76,6 +77,7 @@
       this.mountListeners()
       this.fetchStatistics()
       //this.notifyBackgroundOnLoad()
+      //this.$refs.search.focus() // add autofocus on search field
     },
 
     computed: {
