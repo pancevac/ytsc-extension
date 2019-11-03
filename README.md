@@ -4,15 +4,14 @@ Simple plugin for searching YouTube video comments by keywords.
 
 ![](docs/addon-screenshot.png)
 
-## Installation
-Currently only way to install plugin is thought building from source code and importing into browser as temporary add-on. <br>
-:warning: Keep in mind that extension will be removed when browser is restarted.
+Developed using:
+- [vue-web-extension template](https://github.com/Kocal/vue-web-extension)
 
-#### Requirements
+## Requirements
 - Node.js >= 8 and npm >= 5
-- [git](https://git-scm.com)
+- [Git](https://git-scm.com)
 
-#### Build
+## Build
 
 ```bash
 $ git clone https://github.com/pancevac/firefox-ytsc-extension.git
