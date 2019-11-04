@@ -1,7 +1,7 @@
 {
   "name": "YouTube Comment Search",
   "description": "Firefox extension for searching youtube video comments.",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 2,
   "icons": {
     "48": "icons/youtube-search-v1-48.png",
@@ -14,7 +14,7 @@
   ],
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/watch*"],
+      "matches": ["*://*.youtube.com/*"],
       "js": ["content_scripts/main.js"],
       "css": ["content_scripts/main.css"]
     }
