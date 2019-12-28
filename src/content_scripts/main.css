@@ -1,6 +1,7 @@
 html {
     --ytcs_windowBackground: #222;
     --ytcs_headerBackground: #cc0000;
+    --ytcs_searchButtonHover: #8e0808;
     --ytcs_placeholderColor: rgba(255, 255, 255, .7);
     --ytcs_textColor: #d6d6d6;
     --ytcs_linkColor: #609fff;
@@ -20,6 +21,7 @@ html {
 html:not([dark="true"]):not([ytcs-fullscreen="true"]) {
     --ytcs_windowBackground: #fff;
     --ytcs_headerBackground: #fe0000;
+    --ytcs_searchButtonHover: #d30c0c;
     --ytcs_placeholderColor: rgba(255, 255, 255, .3);
     --ytcs_textColor: #111;
     --ytcs_linkColor: #065fd4;
@@ -212,6 +214,23 @@ html:not([dark="true"]):not([ytcs-fullscreen="true"]) {
     padding-left: 20px;
     user-select: none;
 }
+.ytcs-search-button {
+    background-color: var(--ytcs_headerBackground);
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    border: 0px;
+    margin: 15px;
+    padding: 19px 18px 17px 18px;
+    cursor: pointer;
+}
+.ytcs-search-button:hover {
+    background-color: var(--ytcs_searchButtonHover);
+}
+.ytcs-search-button::-moz-focus-inner {
+    border: 0;
+}
+
 .ytcs-comment-count {
     background-color: transparent;
     color: white;

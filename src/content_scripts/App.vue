@@ -28,6 +28,7 @@
           autocomplete="off"
           :disabled="disableInput"
         >
+        <button type="button" @click="submit" class="ytcs-search-button">Search</button>
         <div class="ytcs-comment-count">{{ formatNumber(commentCount) }} comments</div>
       </div>
       <div class="ytcs-container-view ytcs-flex-item">
