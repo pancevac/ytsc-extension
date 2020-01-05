@@ -11,7 +11,7 @@ class CommentResource {
     this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&amp;lc=${id}`
     this.publishedAt = DateParser(snippet.topLevelComment.snippet.publishedAt)
     this.replies = snippet.totalReplyCount > 0 ?
-      replies.comments.map((comment) => (new ReplyResource(comment)).fetch) :
+      replies.comments.map((comment) => (new ReplyResource(comment)).fetch).reverse() :
       []
   }
 
