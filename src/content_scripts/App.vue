@@ -39,6 +39,10 @@
           v-if="comments.length > 0"
           class="ytcs-view ytcs-scroll-view"
         >
+          <p class="ytcs-thread">
+            <b v-if="totalResults > 1">Search Results: {{ totalResults }}</b>
+            <b v-else>Search Result: {{ totalResults }}</b>
+          </p>
           <thread
             v-for="(comment, key) in comments"
             :key="key"
@@ -69,7 +73,8 @@
         searchTerm: '',
         statistics: {},
         responseMessage: '',
-        disableInput: false
+        disableInput: false,
+        totalResults: 0
       }
     },
 
@@ -159,6 +164,7 @@
       handleCommentsResponse({data}) {
         this.disableInput = false
         if (data.items.length > 0) {
+          this.totalResults = data.pageInfo.totalResults
           this.comments = data.items.map((comment) => {
             return (new CommentResource(comment)).fetch
           })
