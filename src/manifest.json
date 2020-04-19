@@ -10,7 +10,7 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "https://www.googleapis.com/youtube/v3/*"
+    "http://ytcs-service.sinisab.tk/api/v1/*"
   ],
   "content_scripts": [
     {

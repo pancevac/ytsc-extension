@@ -128,8 +128,7 @@
        */
       fetchStatistics() {
         const statParams = {
-          part: 'statistics',
-          id: this.videoId
+          videoId: this.videoId
         }
 
         this.responseMessage = ''
@@ -153,11 +152,8 @@
        */
       fetchSearchedComments() {
         const threadParams = {
-          part: 'snippet, replies',
           videoId: this.videoId,
           searchTerms: this.searchTerm,
-          maxResults: 100,
-          order: 'relevance'
         }
 
         this.disableInput = true

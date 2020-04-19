@@ -1,6 +1,6 @@
 const config = {
-  apiUrl: 'https://www.googleapis.com/youtube/v3',
-  apiKey: 'AIzaSyA3GNkO5_A7P6GZQ79Bh9s3SSS9874CAqI'
+  apiUrl: 'http://ytcs-service.sinisab.tk/api/v1',
+  apiKey: '6bfe90c0a6e7ec8cfbab4738f29c5215'
 }
 
 export default config
