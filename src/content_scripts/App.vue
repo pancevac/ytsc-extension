@@ -69,6 +69,7 @@
         show: true,
         //searching: false,
         videoId: '',
+        historyVideoId: '',
         comments: [],
         searchTerm: '',
         statistics: {},
@@ -101,6 +102,18 @@
        */
       toggleShow() {
         this.show = !this.show
+
+        // if search window is closed, remember current videoId for later
+        if (!this.show) {
+          this.historyVideoId = this.videoId
+        }
+
+        // if app is already initialized and search window is closed,
+        // if user open's search window again, on different video, we want to 
+        // refresh statistics for current video
+        if (this.show && this.videoId !== this.historyVideoId) {
+          this.fetchStatistics()
+        }
       },
 
       /**
@@ -191,7 +204,12 @@
             this.toggleShow()
           } else if (message.status === 'pageChanged') {
             this.videoId = message.videoId
-            this.fetchStatistics()
+            
+            // if search window is active during page change, refresh statistics
+            // this will save resources(API quotas) if window is closed
+            if (this.show) {
+              this.fetchStatistics()
+            }
           }
         })
       },
