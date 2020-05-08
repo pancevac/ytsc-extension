@@ -28,7 +28,7 @@
           autocomplete="off"
           :disabled="disableInput"
         >
-        <button type="button" @click="submit" class="ytcs-search-button">Search</button>
+        <button type="button" @click="submit" class="ytcs-search-button" :disabled="disableInput">Search</button>
         <div class="ytcs-comment-count">{{ formatNumber(commentCount) }} comments</div>
       </div>
       <div class="ytcs-container-view ytcs-flex-item">
@@ -92,7 +92,8 @@
        * Get total number of comments from statistics object.
        */
       commentCount() {
-        return Object.keys(this.statistics).length !== 0 ? this.statistics.commentCount : 0
+        return Object.keys(this.statistics).length !== 0 && this.statistics.hasOwnProperty('commentCount') ?
+          this.statistics.commentCount : 0
       },
     },
 
@@ -132,6 +133,7 @@
         }
 
         this.responseMessage = ''
+        this.disableInput = false
         axios.get('/videos', {params: statParams})
           .then(this.handleStatisticsResponse)
           .catch(this.handleErrorResponse)
@@ -144,6 +146,13 @@
         if (data.items.length) {
           this.statistics = data.items[0].statistics
           this.flushComments()
+        }
+
+        // check if comments on video are disabled
+        if (!this.statistics.hasOwnProperty('commentCount')) {
+          // if commentCount property is missing, means that comments are disabled so we need to disable input
+          this.disableInput = true
+          this.responseMessage = 'Comments are disabled for this video.'
         }
       },
 
@@ -184,7 +193,6 @@
       },
 
       handleErrorResponse(err) {
-        console.log(err.response.data)
         this.responseMessage = 'Ups, something went wrong...'
         this.flushComments()
         this.disableInput = false

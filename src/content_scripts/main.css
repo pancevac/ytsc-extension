@@ -224,7 +224,11 @@ html:not([dark="true"]):not([ytcs-fullscreen="true"]) {
     padding: 19px 18px 17px 18px;
     cursor: pointer;
 }
-.ytcs-search-button:hover {
+.ytcs-search-button:disabled {
+    color:#ffffff45;
+    cursor: default;
+}
+.ytcs-search-button:hover:enabled {
     background-color: var(--ytcs_searchButtonHover);
 }
 .ytcs-search-button::-moz-focus-inner {
