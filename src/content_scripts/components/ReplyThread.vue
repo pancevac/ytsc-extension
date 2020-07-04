@@ -27,7 +27,7 @@
         lang="en"
         role="commentText"
         @click="expand"
-        v-html="reply.textDisplay"
+        v-html="getHighLightedHtml()"
       >
       </div>
     </div>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+  import { getHighLighted } from '../../utils/highLighter'
+
   export default {
     name: "ReplyThread",
 
@@ -44,12 +46,16 @@
       },
       videoId: {
         type: String
+      },
+      searchTerm: {
+        type: String
       }
     },
 
     data() {
       return {
-        expanded: false
+        expanded: false,
+        query: this.searchTerm
       }
     },
 
@@ -61,6 +67,10 @@
         if (!this.expanded) {
           this.expanded = true
         }
+      },
+
+      getHighLightedHtml() {
+        return getHighLighted(this.reply.textDisplay, this.query)
       }
     }
   }

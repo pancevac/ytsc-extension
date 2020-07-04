@@ -48,6 +48,7 @@
             :key="key"
             :video-id="videoId"
             :comment="comment"
+            :search-term="searchTerm"
           ></thread>
         </div>
       </div>

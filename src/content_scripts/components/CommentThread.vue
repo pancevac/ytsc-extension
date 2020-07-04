@@ -28,7 +28,7 @@
           dir="ltr"
           lang="en"
           role="commentText"
-          v-html="comment.textDisplay"
+          v-html="getHighLightedHtml()"
         >
         </div>
       </div>
@@ -40,6 +40,7 @@
       :key="key"
       :video-id="videoId"
       :reply="reply"
+      :search-term="searchTerm"
     ></reply>
 
   </div>
@@ -48,9 +49,12 @@
 
 <script>
   import ReplyThread from "./ReplyThread";
+  import { getHighLighted } from '../../utils/highLighter'
 
   export default {
     name: "CommentThread",
+
+    components: { reply: ReplyThread },
 
     props: {
       comment: {
@@ -58,9 +62,22 @@
       },
       videoId: {
         type: String
+      },
+      searchTerm: {
+        type: String
       }
     },
 
-    components: { reply: ReplyThread }
+    data() {
+      return {
+        query: this.searchTerm
+      }
+    },
+
+    methods: {
+      getHighLightedHtml() {
+        return getHighLighted(this.comment.textDisplay, this.query)
+      }
+    }
   }
 </script>
