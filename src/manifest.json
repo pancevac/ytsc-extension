@@ -10,7 +10,7 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "https://ytcs-service.sinisab.tk/api/v1/*"
+    "https://ytcs-service.herokuapp.com/api/v1/*"
   ],
   "content_scripts": [
     {
