@@ -1,6 +1,6 @@
 {
   "name": "firefox-ytcs-extension",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "Firefox extension for searching youtube video comments.",
   "author": "pancevac sinisa.buncic7@gmail.com",
   "license": "MIT",
