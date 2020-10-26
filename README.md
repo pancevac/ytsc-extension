@@ -8,8 +8,7 @@ Developed using:
 - [vue-web-extension template](https://github.com/Kocal/vue-web-extension)
 
 ## Requirements
-- Node.js >= v8 and npm >= v5
-- [Git](https://git-scm.com)
+- Node.js from v8
 
 ## Server side implementation (Node.js)
 - [https://github.com/pancevac/ytsc-proxy](https://github.com/pancevac/ytsc-proxy)

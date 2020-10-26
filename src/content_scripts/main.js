@@ -15,14 +15,14 @@ window.axios.defaults.baseURL = config.apiUrl
 function initApp({url, id, windowId}) {
   // Append page body with new div on which will be mounted vue app...
   let app = document.createElement('div')
-  app.setAttribute('id', 'app')
+  app.setAttribute('id', 'ytcs-app')
   document.body.appendChild(app)
 
   // Extract video ID from youtube url
   const videoId = url.split('v=')[1].split('&')[0]
 
   new Vue({
-    el: '#app',
+    el: '#ytcs-app',
     data: {
       videoId,
       tabId: id,
