@@ -1,19 +1,27 @@
 global.browser = require('webextension-polyfill')
+const is = require('is_js')
+import { isYoutubeTab } from './utils/eventFilter'
 
 /**
  * Notify when tab is updated (new video is loaded).
  * It will send new video ID to the content script.
  *
  * @param tabId
- * @param title
- * @param tabInfo
+ * @param changeInfo
+ * @param tab
  */
-const notifyOnUpdatedTab = (tabId, {title}, tabInfo) => {
-  if (title) {
+const notifyOnUpdatedTab = (tabId, changeInfo, tab) => {
+  // workaround for chrome browser because it doesn't support event filtering
+  // see https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/onUpdated#Parameters
+  if (is.chrome()) {
+    if (!isYoutubeTab(changeInfo, tab)) return
+  }
+
+  if (changeInfo.title) {
     browser.tabs.sendMessage(tabId, {
       status: 'pageChanged',
       tabId: tabId,
-      videoId: tabInfo.url.split('v=')[1].split('&')[0] // extract video ID from youtube url
+      videoId: tab.url.split('v=')[1].split('&')[0] // extract video ID from youtube url
     })
   }
 }
@@ -29,8 +37,13 @@ browser.browserAction.onClicked.addListener((tab) => {
  * Register listener for url changes (page title).
  * When change occurs, trigger function for notifying content script (vue instance).
  */
-browser.tabs.onUpdated.addListener(notifyOnUpdatedTab, {
-  urls: ['https://www.youtube.com/watch*'],
-  properties: ['title'],
-})
+if (is.firefox()) {
+  browser.tabs.onUpdated.addListener(notifyOnUpdatedTab, {
+    urls: ['https://www.youtube.com/watch*'],
+    properties: ['title'],
+  })
+} else {
+  browser.tabs.onUpdated.addListener(notifyOnUpdatedTab)
+}
+
 
