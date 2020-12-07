@@ -1,4 +1,4 @@
-# Firefox extension for YouTube comments search 
+# Browser extension for YouTube comments search 
 
 Simple plugin for searching YouTube video comments by keywords.
 
