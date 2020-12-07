@@ -1,5 +1,7 @@
 # Browser extension for YouTube comments search 
 
+![](https://img.shields.io/amo/users/youtube-comment-search) ![](https://img.shields.io/amo/dw/youtube-comment-search)
+
 Simple plugin for searching YouTube video comments by keywords.
 
 ![](docs/addon-screenshot.png)
