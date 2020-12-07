@@ -28,7 +28,7 @@ class ReplyResource {
     this.authorProfileImageUrl = snippet.authorProfileImageUrl
     this.authorChannelUrl = snippet.authorChannelUrl
     this.textDisplay = snippet.textDisplay
-    this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&amp;lc=${id}`
+    this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&lc=${id}`
     this.publishedAt = DateParser(snippet.publishedAt)
   }
 
