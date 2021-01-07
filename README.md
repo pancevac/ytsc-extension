@@ -32,6 +32,11 @@ Build the extension into `dist` folder for **production**.
 
 Build the extension into `dist` folder for **development**.
 
+### `npm run build-zip`
+
+Build a zip file following this format `<name>-v<version>.zip`, by reading `name` and `version` from `manifest.json` file.
+Zip file is located in `dist-zip` folder.
+
 ### `npm run watch`
 
 Watch for modifications then run `npm run build`.
