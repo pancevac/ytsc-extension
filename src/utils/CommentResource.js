@@ -10,6 +10,7 @@ class CommentResource {
     this.textDisplay = snippet.topLevelComment.snippet.textDisplay
     this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&lc=${id}`
     this.publishedAt = DateParser(snippet.topLevelComment.snippet.publishedAt)
+    this.likeCount = snippet.topLevelComment.snippet.likeCount
     this.replies = replies ?
       replies.comments.map((comment) => (new ReplyResource(comment)).fetch).reverse() :
       []
@@ -30,6 +31,7 @@ class ReplyResource {
     this.textDisplay = snippet.textDisplay
     this.commentUrl = `https://www.youtube.com/watch?v=${snippet.videoId}&lc=${id}`
     this.publishedAt = DateParser(snippet.publishedAt)
+    this.likeCount = snippet.likeCount
   }
 
   get fetch() {

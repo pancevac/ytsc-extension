@@ -30,6 +30,17 @@
         v-html="getHighLightedHtml()"
       >
       </div>
+      <div
+        v-if="reply.likeCount > 0"
+        class="ytcs-comment-likes ytcs-box"
+      >
+        <div class="ytcs-box">
+          <img class="ytcs-comment-likes-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABCElEQVR4nO2UsWoCQRCGvwTrdJZRi0Bs0gesBQsfII2vYJfSN7CxkJAQENHUaVLYWOQFfAetbBKSQiRwajj4D5Yld7fn7UECGViY2Zv5v2GZG/hltgbegAlQ9y1+ARyM8wlc+QR0JDwHnuS/+ATcS/QWOJP/4Uu8CwQSbQBl+e95hUvAUGJ7oAecAE3dLfKIh88wk9AWuDG+9XU/yCIYTUdkz4rD0bw27k+BpTVR5lkBLRfAl+KalddOEDchqQA7drXYuj8BOFfNpijAnWqmRQAqGowgbhHmBTwoP9y0+AZUje4viwA8KneclHQsoOrS/U+CK4c/1jyjtE5sQMsRsgNetcL/jcz2DT1MixkpDKX3AAAAAElFTkSuQmCC">
+        </div>
+        <div 
+          class="ytcs-comment-meta ytcs-comment-likes-number"
+        >{{ reply.likeCount }}</div>
+        </div>
     </div>
   </div>
 </template>
