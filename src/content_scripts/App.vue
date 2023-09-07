@@ -57,7 +57,6 @@
 </template>
 
 <script>
-  import config from "../config";
   import { CommentResource } from "../utils/CommentResource";
   import CommentThread from "./components/CommentThread";
 
@@ -71,12 +70,14 @@
         //searching: false,
         videoId: '',
         historyVideoId: '',
+        channelId: '',
         comments: [],
         searchTerm: '',
         statistics: {},
         responseMessage: '',
         disableInput: false,
-        totalResults: 0
+        totalResults: 0,
+        globalSearchRegex: /^global:/
       }
     },
 
@@ -146,6 +147,7 @@
       handleStatisticsResponse({data}) {
         if (data.items.length) {
           this.statistics = data.items[0].statistics
+          this.channelId = data.items[0].snippet.channelId
           this.flushComments()
         }
 
@@ -161,9 +163,17 @@
        * Fetch video comments by search term.
        */
       fetchSearchedComments() {
-        const threadParams = {
-          videoId: this.videoId,
-          searchTerms: this.searchTerm,
+        let threadParams = {
+          searchTerms: this.searchTerm
+        }
+
+        // If "global:" prefix is detected, remove it from search terms and send channelId instead of videoId
+        // because we want to search comments on whole channel instead of specific video.
+        if (this.globalSearchRegex.test(this.searchTerm)) {
+          threadParams.searchTerms = threadParams.searchTerms.replace(this.globalSearchRegex, '')
+          threadParams.allThreadsRelatedToChannelId = this.channelId
+        } else {
+          threadParams.videoId = this.videoId
         }
 
         this.disableInput = true
